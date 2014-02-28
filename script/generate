@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require "rubygems"
+require "thor"
+
+require File.expand_path("../../generators/active_merchant_generator", __FILE__)
+
+Dir[File.expand_path("../..", __FILE__) + "/generators/*/*.rb"].each do |generator|
+  require generator
+end
+
+class Generate < Thor
+  register(GatewayGenerator, "gateway", "gateway NAME", "Generates a new gateway.")
+  register(IntegrationGenerator, "integration", "integration NAME", "Generates a new integration.")
+end
+
+Generate.start
